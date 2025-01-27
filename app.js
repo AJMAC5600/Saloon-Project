@@ -1,19 +1,17 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
+const router = require('./routes/router'); // Import the router
 
 // Middleware
 app.use(express.static("public"));
-
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Set EJS as the view engine
 app.set("view engine", "ejs");
 
 // Routes
-app.get("/", (req, res) => {
-  res.render("pages/home", { title: "Home Page" });
-});
+app.use('/', router); // Use the router for the root path
 
 // Error handling middleware
 app.use((err, req, res, next) => {
